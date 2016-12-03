@@ -1,0 +1,30 @@
+{
+  "name": "node-pdflatex",
+  "version": "0.1.0",
+  "description": "LaTeX wrapper for Node",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "kube",
+  "license": "MIT",
+  "keywords": [
+    "tex",
+    "latex",
+    "pdflatex",
+    "pdf"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "6.0.51",
+    "@types/through2": "^2.0.32",
+    "@types/tmp": "^0.0.32",
+    "typescript": "^2.0.10"
+  },
+  "dependencies": {
+    "monolite": "^0.1.6",
+    "through2": "^2.0.3",
+    "tmp": "^0.0.31"
+  }
+}
