@@ -13,9 +13,11 @@ import { spawn } from 'child_process'
 import { createReadStream } from 'fs'
 import { set } from 'monolite'
 import { dir as tmpDir } from 'tmp'
+import { Readable } from 'stream'
 import through = require('through2')
 
-type Readable = NodeJS.ReadableStream
+type InputStream = NodeJS.ReadableStream | Readable
+type OutputSteam = NodeJS.ReadableStream | Readable
 
 type Options = {
   texInputs?: string[]
@@ -38,7 +40,7 @@ const createChildEnv = (texInputs: string[] = []) =>
   )
 
 /**
- * Create a temporary directory for LaTeX file compilation
+ * Create a temporary directory for LaTeX files compilation
  */
 const createTempDirectory = () =>
   new Promise<string>((resolve, reject) =>
@@ -50,12 +52,14 @@ const createTempDirectory = () =>
 /**
  * Transform a LaTeX stream into a PDF stream
  */
-const pdflatex = (source: Readable, options?: Options): Readable => {
+const pdflatex = (source: InputStream, options?: Options): OutputSteam => {
   const result = through()
 
   createTempDirectory()
     .then(tempPath => {
 
+      // Create pdflatex command with arguments
+      // Command reads LaTeX source from STDIN
       const command = spawn(
         'pdflatex',
         [
@@ -69,16 +73,21 @@ const pdflatex = (source: Readable, options?: Options): Readable => {
         }
       )
 
+      // Pass source to command
+      source.pipe(command.stdin)
+
+      // Hack to prevent compilation to never end
+      command.stdout.pipe(through())
+
+      // When compilation is finished
       command.on('exit', code =>
         code === 0 ?
-          // Read created PDF file and pipe to result
+          // Pipe created PDF to result
           createReadStream(join(tempPath, 'texput.pdf')).pipe(result)
 
-          // Emit an error to result stream
+          // Emit an error to result
           : result.emit('error', 'Error during LaTeX compilation')
       )
-
-      source.pipe(command.stdin)
     })
 
   return result
