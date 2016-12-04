@@ -1,6 +1,6 @@
 node-pdflatex
 =============
-> LaTeX wrapper for node
+> LaTeX PDF wrapper for node
 
 A LaTeX PDF wrapper for Node, written in TypeScript, focused on streams.
 

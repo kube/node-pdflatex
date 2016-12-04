@@ -1,7 +1,7 @@
 {
   "name": "node-pdflatex",
   "version": "0.1.0",
-  "description": "LaTeX wrapper for Node",
+  "description": "LaTeX PDF wrapper for Node",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "kube",
