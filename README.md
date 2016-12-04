@@ -20,7 +20,15 @@ import { createReadStream } from 'fs'
 
 const latexStream = createReadStream('document.tex')
 
-pdflatex(latexStream)
+const output = pdflatex(latexStream)
+
+output.pipe(createWriteStream('document.pdf'))
+```
+
+Or in a single expression
+
+```js
+pdflatex(createReadStream('document.tex')).pipe(createWriteStream('document.tex'))
 ```
 
 
