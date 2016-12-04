@@ -8,7 +8,7 @@
      ## ## ## :##
       ## ## ##*/
 
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { spawn } from 'child_process'
 import { createReadStream } from 'fs'
 import { set } from 'monolite'
@@ -18,7 +18,6 @@ import through = require('through2')
 type Readable = NodeJS.ReadableStream
 
 type Options = {
-  cwd: string
   texInputs?: string[]
   shellEscape?: boolean
 }
@@ -31,7 +30,7 @@ const createChildEnv = (texInputs: string[] = []) =>
   set(process.env, _ => _.TEXINPUTS)((TEXINPUTS: string = '') =>
     [
       // Transform relative paths in absolute paths
-      ...texInputs.map(path => join(process.cwd(), path)),
+      ...texInputs.map(path => resolve(process.cwd(), path)),
       ...TEXINPUTS.split(':')
     ]
       // Append colon to use default paths too
