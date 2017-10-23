@@ -17,14 +17,14 @@
     "prepublish": "tsc"
   },
   "devDependencies": {
-    "@types/node": "6.0.51",
-    "@types/through2": "^2.0.32",
-    "@types/tmp": "^0.0.32",
-    "typescript": "^2.0.10"
+    "@types/node": "^8.0.46",
+    "@types/through2": "^2.0.33",
+    "@types/tmp": "0.0.33",
+    "typescript": "^2.5.3"
   },
   "dependencies": {
-    "monolite": "^0.1.6",
+    "monolite": "^0.4.5",
     "through2": "^2.0.3",
-    "tmp": "^0.0.31"
+    "tmp": "0.0.33"
   }
 }
