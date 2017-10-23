@@ -52,7 +52,7 @@ const createTempDirectory = () =>
 /**
  * Transform a LaTeX stream into a PDF stream
  */
-const pdflatex = (source: InputStream, options?: Options): OutputSteam => {
+const pdflatex = (source: InputStream, options: Options): OutputSteam => {
   const result = through()
 
   createTempDirectory()
