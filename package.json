@@ -6,21 +6,48 @@
   "types": "lib/index.d.ts",
   "author": "kube",
   "license": "MIT",
-  "keywords": ["tex", "latex", "pdflatex", "pdf"],
+  "keywords": [
+    "tex",
+    "latex",
+    "pdflatex",
+    "pdf"
+  ],
   "scripts": {
+    "test": "jest",
     "build": "tsc",
-    "prepublish": "tsc"
+    "dev": "tsc --watch"
   },
   "devDependencies": {
+    "@types/jest": "^21.1.4",
     "@types/node": "^8.0.46",
-    "@types/through2": "^2.0.33",
     "@types/tmp": "0.0.33",
+    "jest": "^21.2.1",
     "prettier": "^1.7.4",
+    "ts-jest": "^21.1.3",
     "typescript": "^2.5.3"
   },
   "dependencies": {
     "monolite": "^0.4.5",
-    "through2": "^2.0.3",
     "tmp": "0.0.33"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "skipBabel": true,
+        "tsConfigFile": "src/__tests__/tsconfig.json"
+      }
+    },
+    "transform": {
+      ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/src/(__tests__/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ]
   }
 }

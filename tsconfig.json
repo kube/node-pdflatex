@@ -4,6 +4,7 @@
     "target": "es5",
     "lib": ["es5", "es2015.promise"],
     "strict": true,
+    "types": ["node"],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
@@ -11,5 +12,6 @@
     "sourceMap": true,
     "rootDir": "src",
     "outDir": "lib"
-  }
+  },
+  "exclude": ["node_modules", "lib", "src/__tests__"]
 }
