@@ -1,21 +1,17 @@
 {
   "name": "node-pdflatex",
   "version": "0.2.0",
-  "description": "LaTeX PDF wrapper for Node",
+  "description": "PDFLaTeX wrapper for Node",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "kube",
   "license": "MIT",
-  "keywords": [
-    "tex",
-    "latex",
-    "pdflatex",
-    "pdf"
-  ],
+  "keywords": ["tex", "latex", "pdflatex", "pdf"],
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublish": "jest && tsc"
   },
   "devDependencies": {
     "@types/jest": "^21.1.4",
@@ -41,13 +37,7 @@
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "/src/(__tests__/.*|\\.(test|spec))\\.(ts|js)$",
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ]
+    "moduleDirectories": ["node_modules", "src"],
+    "moduleFileExtensions": ["ts", "js"]
   }
 }
