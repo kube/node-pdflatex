@@ -1,6 +1,6 @@
 node-pdflatex
 =============
-> LaTeX PDF wrapper for Node. Using Streams.
+> PDFLaTeX wrapper for Node
 
 
 Install
@@ -12,25 +12,20 @@ npm install node-pdflatex
 Usage
 -----
 
-`pdflatex` takes a stream as input and returns a stream as output.
+`pdflatex` takes latex source and returns a Promise of Buffer.
 
 ```js
 import pdflatex from 'node-pdflatex'
-import { createReadStream } from 'fs'
 
-const latexStream = createReadStream('document.tex')
+const source = `
+\\documentclass{article}
+\\begin{document}
+Hello World!
+\\end{document}
+`
 
-const output = pdflatex(latexStream)
-
-output.pipe(createWriteStream('document.pdf'))
+const pdf = await pdflatex(source)
 ```
-
-Or in a single expression
-
-```js
-pdflatex(createReadStream('document.tex')).pipe(createWriteStream('document.tex'))
-```
-
 
 ### Options
 
@@ -39,7 +34,7 @@ pdflatex(createReadStream('document.tex')).pipe(createWriteStream('document.tex'
 Adds the `-shell-escape` flag during compilation.
 
 ```js
-pdflatex(latexStream, { shellEscape: true })
+pdflatex(latexContent, { shellEscape: true })
 ```
 
 #### `texInputs`: `Array<string>`
@@ -47,7 +42,7 @@ pdflatex(latexStream, { shellEscape: true })
 Adds paths to `TEXINPUTS` env var during compilation.
 
 ```js
-pdflatex(latexStream, { texInputs: ['../resources/'] })
+pdflatex(latexContent, { texInputs: ['../resources/'] })
 ```
 
 
