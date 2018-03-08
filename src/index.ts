@@ -14,6 +14,7 @@ import { exec, readFile, writeFile, createTempDirectory } from './utils'
 import { readErrorLog } from './readErrorLog'
 
 export type Options = {
+  engine?: string
   texInputs?: string[]
   shellEscape?: boolean
 }
@@ -35,7 +36,7 @@ const createChildEnv = (texInputs: string[] = []) =>
 
 const createCommand = (options: Options) =>
   [
-    'pdflatex',
+    options.engine == null ? 'pdflatex' : options.engine,
     ...(options.shellEscape ? ['-shell-escape'] : []),
     '-halt-on-error',
     'texput.tex'

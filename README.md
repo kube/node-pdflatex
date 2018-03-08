@@ -29,6 +29,14 @@ const pdf = await pdflatex(source)
 
 ### Options
 
+#### `engine`: `string`
+
+Changes which LaTeX engine is used (such as `pdflatex`, `xelatex`, etc.).
+
+```js
+pdflatex(latexContent, { engine: 'xelatex' })
+```
+
 #### `shellEscape`: `boolean`
 
 Adds the `-shell-escape` flag during compilation.
