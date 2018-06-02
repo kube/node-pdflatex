@@ -16,6 +16,7 @@ import { readErrorLog } from './readErrorLog'
 export type Options = {
   texInputs?: string[]
   shellEscape?: boolean
+  engine?: string[]
 }
 
 /**
@@ -35,7 +36,7 @@ const createChildEnv = (texInputs: string[] = []) =>
 
 const createCommand = (options: Options) =>
   [
-    'pdflatex',
+    options.engine ? options.engine : 'pdflatex',
     ...(options.shellEscape ? ['-shell-escape'] : []),
     '-halt-on-error',
     'texput.tex'
