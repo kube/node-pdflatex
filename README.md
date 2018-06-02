@@ -45,6 +45,15 @@ Adds paths to `TEXINPUTS` env var during compilation.
 pdflatex(latexContent, { texInputs: ['../resources/'] })
 ```
 
+#### `engine`: `string'
+
+Allows you to use a tex engine other than the default pdflatex engine.
+
+```js
+pdflatex(leatexContent, { engine: 'xelatex' }
+```
+
+**This option requires that you have the appropriate engine installed.**  See the example [Dockerfile](./Dockerfile).
 
 TypeScript
 ----------
